@@ -1,1 +1,3 @@
-
+The ratinale for each choice is super well explained, leaving no doubt as to why that piece of code was considered a code smell.
+If the teacher allows for two identical types of code smells but in diferent zones of the project I have no complains and I think you did a great job!
+If not I would suggest finding a diferente type of code smell (one that's not law of Demeter or switch statments).
