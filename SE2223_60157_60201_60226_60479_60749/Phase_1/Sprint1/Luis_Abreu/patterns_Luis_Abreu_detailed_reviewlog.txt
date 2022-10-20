@@ -1,1 +1,2 @@
 The location is well defined and the rationale behind these patterns is justified so I agree with what has been said in the document.
+Signed: Guilherme Franco
