@@ -1,0 +1,3 @@
+Review done by Luís Abreu:
+    Checked all 3 code smells that you identified, semmed all pretty good.
+    I would just improve the Refactor proposal of the Dead Code, its written in a way a little bit informal
