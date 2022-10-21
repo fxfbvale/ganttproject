@@ -1,2 +1,2 @@
 Review done by Luís Abreu:
-    All 3 design patterns seemed well identified and justified. Good job!
+   I reviewed the Design Pattern 1: Adapter Pattern, its well identified and well justified!
