@@ -1,0 +1,2 @@
+Review done by Luís Abreu:
+Found 3 code smells well identified and well justified. The code smell message chain doesnt happen so i would delete it and stick to the other 3.
