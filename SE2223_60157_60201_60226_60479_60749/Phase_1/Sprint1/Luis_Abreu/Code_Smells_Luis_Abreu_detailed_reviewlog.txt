@@ -3,5 +3,5 @@ Minor gramatical errors "these class" -> "This class"; "betwenn" -> "Between"; "
 Other than this I agree with the solution provided for the first code Smell and the ratinale is very clear as to why it is considered a data class. 
 Signed : Guilherme Franco
 
-I think the code smells are well identified and the explanation is very clear. The only think to point out is the gramatical error (store to stored) that was not corrected.
+I think the second code smell is well identified and the explanation is very clear. The only think to point out is the gramatical error (store to stored) in the first code smell that was not corrected.
 Signed: Tiago Francisco
