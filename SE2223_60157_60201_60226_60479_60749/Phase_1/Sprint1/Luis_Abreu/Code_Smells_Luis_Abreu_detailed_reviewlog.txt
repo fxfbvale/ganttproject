@@ -1,6 +1,6 @@
 Minor gramatical errors "these class" -> "This class"; "betwenn" -> "Between"; "better store in other class" -> better stored in another class";
 "privade" -> "private";
-Other than this I agree with the solutions provided and the code smells are well justified, so I agree with them all!
+Other than this I agree with the solution provided for the first code Smell and the ratinale is very clear as to why it is considered a data class. 
 Signed : Guilherme Franco
 
 I think the code smells are well identified and the explanation is very clear. The only think to point out is the gramatical error (store to stored) that was not corrected.
