@@ -5,7 +5,5 @@ Review done by Pedro Gouveia:
     I reviewed the Code Smell: Speculative Generality. 
     I think this code smell is on the spot, it should not definetly be there, as it is something that is not happening in the present and if it happens in the future it may be a reason for a lot of hours spent finding the bug, as the error would just be catched and the coder would not know about it.
 
-Related to the review of the third code smell. Initially the title of it is wrong, since it says Dead code 3: instead of Code Smell 3:
-About the code smell, the explanation is a bit too long but is really well writen and also well described.
-There is no refactor proposal.
+Related to the review of the third code smell. After the changes i think it is really good, the explanation is a bit too long but is really well writen and also well described.
 Signed: Francisco Vale
