@@ -2,5 +2,5 @@ The last code Smell (Long Method) is well justified and the location is also cle
 Signed: Guilherme Franco
 
 Review done by Luís Abreu:
-I reviewed the Code Smell 1: Dead Code/ Speculative Generality, its very well justified and i agree with all the things u wrote. 
+I reviewed the Code Smell 1: Dead Code/ Speculative Generality, its very well justified and i agree with all the things you wrote. 
     
