@@ -1,2 +1,4 @@
 The location is well defined and the rationale behind the pattern is justified so I agree with what has been said in the document regarding the first Design Pattern found (Memento Pattern).
 Signed: Guilherme Franco
+The second pattern is well presented, I would just try to do the rationale a little more specific.
+Signed: Tiago Francisco
