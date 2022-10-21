@@ -1,1 +1,2 @@
-Very clear when justifying why a design pattern is a design pattern, my only concern is having 2 identical design patterns in the report but other than that, great job, truly!
+The facade Design Pattern is well justified allowing even a person with no background in IT to understand it.
+Signed: Guilherme Franco
