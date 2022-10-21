@@ -1,2 +1,4 @@
 The facade Design Pattern is well justified allowing even a person with no background in IT to understand it.
 Signed: Guilherme Franco
+The second design pattern (observer) is well presented and nothing needs to be corrected.
+Signed: Tiago Francisco
