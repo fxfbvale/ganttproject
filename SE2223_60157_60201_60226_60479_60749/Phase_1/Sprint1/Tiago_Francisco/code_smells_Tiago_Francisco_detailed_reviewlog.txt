@@ -1,2 +1,2 @@
 Review done by Luís Abreu:
-    I reviewed the Smell Code: Dead Code. I think its well identified. I would just use Guilherme Franco structure of presentation, the rest is good in my opinion.
+    I reviewed the Smell Code: Dead Code. I think its well identified. I would just use Guilherme Franco's structure of presentation, the rest is good in my opinion.
