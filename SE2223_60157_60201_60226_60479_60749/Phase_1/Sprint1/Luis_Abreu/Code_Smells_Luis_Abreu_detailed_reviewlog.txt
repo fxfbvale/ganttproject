@@ -2,3 +2,6 @@ Minor gramatical errors "these class" -> "This class"; "betwenn" -> "Between"; "
 "privade" -> "private";
 Other than this I agree with the solutions provided and the code smells are well justified, so I agree with them all!
 Signed : Guilherme Franco
+
+I think the code smells are well identified and the explanation is very clear. The only think to point out is the gramatical error (store to stored) that was not corrected.
+Signed: Tiago Francisco
