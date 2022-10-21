@@ -1,2 +1,4 @@
 The rationale for the first code smell is well defined and leaves no doubt as to why it is considered a code smell.
 Signed: Guilherme Franco
+
+The second code smell(Law of Demeter) is very well explained and clear. The only thing is that you didn't present any alternative.
