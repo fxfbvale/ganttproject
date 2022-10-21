@@ -1,2 +1,6 @@
 Review done by Luís Abreu:
  I reviewed the Design Pattern 3: Visitor Design Pattern. I agree with everything.
+
+I reviewed the Design Pattern 2: Chain of Responsibility Design Pattern.
+The several calls are explicit and the explanation is clear, I agree with what was said.
+Signed: Guilherme Franco.
