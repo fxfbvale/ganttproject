@@ -2,3 +2,6 @@ Review done by Luís Abreu:
    I reviewed the Design Pattern 1: Adapter Pattern, its well identified and well justified!
 Review done by Tiago Francisco:
 	The second pattern (factory method pattern) is well explained and very clear.
+Review done by Pedro Gouveia:
+    I reviewed the design pattern: Decorator.
+    I think the rationale is almost perfect, but lacks something. It should showcase an example of a wrapping, either by one or multiple classes so we can see an example of the delegation in action.
