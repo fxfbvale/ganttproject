@@ -4,3 +4,6 @@ Signed: Guilherme Franco
 Review done by Luís Abreu:
 I reviewed the Code Smell 1: Dead Code/ Speculative Generality, its very well justified and i agree with all the things you wrote. 
     
+Review done by Pedro Gouveia:
+I review the code smell Data Class.
+This code smell is very well explained and I have absolutely nothing to add to it.
