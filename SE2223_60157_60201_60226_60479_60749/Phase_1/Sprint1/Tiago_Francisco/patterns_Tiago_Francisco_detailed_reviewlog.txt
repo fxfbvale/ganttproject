@@ -1,0 +1,2 @@
+Review done by Luís Abreu:
+    I reviewed the Design Pattern: Facade. Its well identified and well justified, i would just put it in a more formal apresentation way like i said in the code smells review
