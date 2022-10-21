@@ -1,1 +1,2 @@
 The last code Smell (Long Method) is well justified and the location is also clearly defined so I see no problems and agree with it.
+Signed: Guilherme Franco
