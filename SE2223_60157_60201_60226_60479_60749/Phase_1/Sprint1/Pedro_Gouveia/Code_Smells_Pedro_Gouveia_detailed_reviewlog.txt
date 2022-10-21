@@ -1,2 +1,2 @@
 The rationale for the first code smell is well defined and leaves no doubt as to why it is considered a code smell.
-
+Signed: Guilherme Franco
