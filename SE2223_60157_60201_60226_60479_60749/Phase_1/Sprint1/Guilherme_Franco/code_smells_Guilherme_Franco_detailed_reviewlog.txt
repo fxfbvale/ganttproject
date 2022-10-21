@@ -1,3 +1,5 @@
 Review done by Luís Abreu:
     Checked the Code Smell 1: Dead Code, it seems well identified and well justified.
     I would just improve the Refactor proposal, its written in a way a little bit informal.
+Review done by Tiago Francisco:
+	The second identified code smell (message chain) is well explained and very clear. I think that nothing needs to be corrected.
