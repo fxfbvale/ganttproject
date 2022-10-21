@@ -1,2 +1,4 @@
 Review done by Luís Abreu:
    I reviewed the Design Pattern 1: Adapter Pattern, its well identified and well justified!
+Review done by Tiago Francisco:
+	The second pattern (factory method pattern) is well explained and very clear.
