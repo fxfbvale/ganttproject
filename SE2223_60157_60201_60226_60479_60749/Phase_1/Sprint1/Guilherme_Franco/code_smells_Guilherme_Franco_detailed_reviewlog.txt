@@ -4,4 +4,10 @@ Review done by Luís Abreu:
     
 Review done by Tiago Francisco:
 	The second identified code smell (message chain) is well explained and very clear. I think that nothing needs to be corrected.
+    
+Review done by Pedro Gouveia:
+    Reviewed the Code Smell : Duplicate Code.
+    I think my colleague did an excelent job at finding this code smell. This is a very bad practice and should be fixed.
+    The rationale is very well explained but in the refractoring I think Guilherme did an error by mentioning the comboBox as "jumbo box".
+
 
