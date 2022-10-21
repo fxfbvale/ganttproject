@@ -1,2 +1,4 @@
 Review done by Luís Abreu:
     I reviewed the Design Pattern: Facade. Its well identified and well justified, i would just put it in a more formal apresentation way like i said in the code smells review
+Review done by Pedro Gouveia:
+    I review the Design Pattern: Open/Closed. The rationale is valid but it lacks some explanation on why the abstract class is closed and should not be changed.
