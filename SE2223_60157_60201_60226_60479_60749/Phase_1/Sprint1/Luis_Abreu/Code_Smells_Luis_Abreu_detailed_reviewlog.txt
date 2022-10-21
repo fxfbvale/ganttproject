@@ -7,3 +7,4 @@ I think the second code smell is well identified and the explanation is very cle
 Signed: Tiago Francisco
 
 Related to the third code smell, even though that the number of lines reapeted is small, it is indeed a code smell. The Rationale and the Refactor are both pretty clear and well explained, so I wouldn't change a thing.
+Signed: Francisco Vale
