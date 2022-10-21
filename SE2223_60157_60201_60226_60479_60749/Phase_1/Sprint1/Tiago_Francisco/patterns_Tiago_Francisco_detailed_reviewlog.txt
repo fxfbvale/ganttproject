@@ -4,5 +4,5 @@ Review done by Luís Abreu:
 Review done by Pedro Gouveia:
     I review the Design Pattern: Open/Closed. The rationale is valid but it lacks some explanation on why the abstract class is closed and should not be changed.
 
-Related to the third Desgn Pattern I don't really agree with it since it's kinda confused and also the class you chose to show isn't the right one, since the iterator comes from a method from another class, and still that class does more things than just iterate through a data structure in order to hide the implementations to the client.
+Related to the Decorator Design Pattern. I agree with the choice, however the explanation is kinda confused, and for someone who is not familiar with GOF design patterns it will be really hard to understand.
 Signed: Francisco Vale
