@@ -36,6 +36,7 @@ import biz.ganttproject.core.option.DefaultDateOption;
 import biz.ganttproject.core.option.GPOption;
 import biz.ganttproject.core.option.GPOptionGroup;
 
+import net.sourceforge.ganttproject.action.GPAction;
 import net.sourceforge.ganttproject.GPLogger;
 import net.sourceforge.ganttproject.GanttExportSettings;
 import net.sourceforge.ganttproject.IGanttProject;
@@ -82,6 +83,10 @@ public abstract class ExporterBase implements Exporter {
 
   public UIFacade getUIFacade() {
     return myUIFacade;
+  }
+
+  public GPAction getActions() {
+    return null;
   }
 
   public IGanttProject getProject() {

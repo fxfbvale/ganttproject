@@ -117,6 +117,9 @@
       <exporter class="net.sourceforge.ganttproject.export.ExporterToImage"/>
       <exporter class="net.sourceforge.ganttproject.export.ExporterToCSV"/>
    </extension>
+   <extension point="net.sourceforge.ganttproject.exporter">
+      <exporter class="net.sourceforge.ganttproject.export.ExporterToGoogleCalendar"/>
+   </extension>
    <extension
            point="net.sourceforge.ganttproject.importer">
       <importer class="net.sourceforge.ganttproject.importer.ImporterFromGanttFile"/>

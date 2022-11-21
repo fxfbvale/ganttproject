@@ -24,6 +24,7 @@ import java.util.List;
 
 import net.sourceforge.ganttproject.IGanttProject;
 import net.sourceforge.ganttproject.gui.UIFacade;
+import net.sourceforge.ganttproject.action.GPAction;
 
 import org.osgi.service.prefs.Preferences;
 
@@ -36,6 +37,9 @@ public interface Exporter {
   String getFileTypeDescription();
 
   GPOptionGroup getOptions();
+
+  GPAction getActions();
+
 
   List<GPOptionGroup> getSecondaryOptions();
 
