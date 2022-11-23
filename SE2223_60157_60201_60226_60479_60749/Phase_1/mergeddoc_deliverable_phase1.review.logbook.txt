@@ -1,0 +1,210 @@
+﻿Reviews
+
+
+Francisco Vale: Code Smells
+
+Reviews:
+
+
+Review done by Guilherme Franco:
+The last code Smell (Long Method) is well justified and the location is also clearly defined so I see no problems and agree with it.
+
+
+
+
+Review done by Luís Abreu:
+I reviewed the Code Smell 1: Dead Code/ Speculative Generality, it's very well justified and I agree with all the things you wrote. 
+    
+Review done by Pedro Gouveia:
+I reviewed the code smell Data Class.
+This code smell is very well explained and I have absolutely nothing to add to it.
+
+
+
+
+Francisco Vale: Design Patterns
+
+Reviews:
+
+
+Review done by Luís Abreu:
+I reviewed the Design Pattern 3: Visitor Design Pattern. I agree with everything.
+
+
+Review done by Guilherme Franco:
+I reviewed the Design Pattern 2: Chain of Responsibility Design Pattern.
+The several calls are explicit and the explanation is clear, I agree with what was said.
+
+
+Review done by Pedro Gouveia:
+I reviewed the design pattern template method and I couldn't agree more with it, everything about it is well explained even for a person not familiarized with GOF design patterns. 
+
+
+
+
+Guilherme Franco: Code Smells
+
+
+Reviews:
+
+
+Review done by Luís Abreu:
+    Checked the Code Smell 1: Dead Code, it seems well identified and well justified.
+    I would just improve the Refactor proposal, its written in a way a little bit informal.
+    
+
+
+Review done by Tiago Francisco:
+The second identified code smell (message chain) is well explained and very clear. I think that nothing needs to be corrected.
+    
+Review done by Pedro Gouveia:
+    Reviewed the Code Smell : Duplicate Code.
+    I think my colleague did an excelent job at finding this code smell. This is a very bad practice and should be fixed.
+    The rationale is very well explained but in the refractoring I think Guilherme did an error by mentioning the comboBox as "jumbo box".
+
+
+
+
+Guilherme Franco: Design Patterns
+
+
+Reviews:
+
+
+Review done by Luís Abreu:
+   I reviewed the Design Pattern 1: Adapter Pattern, its well identified and well justified!
+
+
+Review done by Tiago Francisco:
+        The second pattern (factory method pattern) is well explained and very clear.
+
+
+Review done by Pedro Gouveia:
+    I reviewed the design pattern: Decorator.
+    I think the rationale is almost perfect, but lacks something. It should showcase an example of a wrapping, either by one or multiple classes so we can see an example of the delegation in action.
+
+
+
+
+Luís Abreu: Code Smells
+
+
+Reviews:
+
+
+Minor grammatical errors "these class" -> "This class"; "betwenn" -> "Between"; "better store in other class" -> better stored in another class";
+"privade" -> "private";
+Other than this I agree with the solution provided for the first code Smell (Data Class) and the rationale is very clear as to why it is considered a data class. 
+Signed : Guilherme Franco
+
+
+I think the second code smell is well identified and the explanation is very clear. The only thing to point out is the grammatical error (store to stored) in the first code smell that was not corrected.
+Signed: Tiago Francisco
+
+
+Related to the third code smell, even though the number of lines repeated is small, it is indeed a code smell. The Rationale and the Refactor are both pretty clear and well explained, so I wouldn't change a thing.
+Signed: Francisco Vale
+
+
+
+
+Luís Abreu: Design Patterns
+
+
+Reviews:
+
+
+The location is well defined and the rationale behind the pattern is justified so I agree with what has been said in the document regarding the first Design Pattern found (Memento Pattern).
+Signed: Guilherme Franco
+
+
+The second pattern is well presented, I would just try to do the rationale a little more specific.
+Signed: Tiago Francisco
+
+
+Related to the third design pattern we can easily see that this is actually a Facade Design Pattern. As Tiago said I would try to make the Rationale a bit more incident in this specific case, instead of being a general description of what the Facade Design Pattern stands for.
+Signed: Francisco Vale
+
+
+
+
+Pedro Gouveia: Code Smells
+
+
+Reviews:
+
+
+The rationale for the first code smell is well defined and leaves no doubt as to why it is considered a code smell.
+Signed: Guilherme Franco
+
+
+The second code smell (Law of Demeter) is very well explained and clear. The only thing is that you didn't present any alternative.
+Update: The code smell now has a refractor and I totally agree with it.
+Signed: Tiago Francisco
+
+
+
+
+Related to the third code smell. The reason why it was chosen is well explained and it makes sense, however there is no proposed solution to this code smell.
+Signed: Francisco Vale
+
+
+
+
+Pedro Gouveia: Design Patterns
+
+
+Reviews:
+
+
+The facade Design Pattern is well justified allowing even a person with no background in IT to understand it.
+Signed: Guilherme Franco
+
+
+The second design pattern (observer) is well presented and nothing needs to be corrected.
+Signed: Tiago Francisco
+
+
+After the changes from my previous review I agree with the chosen design pattern and it’s well written, making it easy to understand, even for someone not familiar with GOF design patterns.
+Signed: Francisco Vale
+
+
+
+
+Tiago Francisco: Code Smells
+
+
+Reviews:
+
+
+Review done by Luís Abreu:
+    I reviewed the Code Smell: Dead Code. I think it's well identified. I would just use Guilherme Franco's structure of presentation, the rest is good in my opinion.
+    
+Review done by Pedro Gouveia:
+    I reviewed the Code Smell: Speculative Generality. 
+    I think this code smell is on the spot, it should not definitely be there, as it is something that is not happening in the present and if it happens in the future it may be a reason for a lot of hours spent finding the bug, as the error would just be catched and the coder would not know about it.
+
+
+Review done by Francisco Vale:
+Related to the review of the third code smell. After the changes i think it is really good, the explanation is a bit too long but is really well written and also well described.
+
+
+
+
+Tiago Francisco: Design Patterns
+
+
+Reviews:
+
+
+Review done by Luís Abreu:
+    I reviewed the Design Pattern: Facade. Its well identified and well justified, i would just put it in a more formal apresentation way like i said in the code smells review
+    
+Review done by Pedro Gouveia:
+    I review the Design Pattern: Open/Closed. The rationale is valid but it lacks some explanation on why the abstract class is closed and should not be changed.
+
+
+
+
+Review done by Francisco Vale
+Related to the Decorator Design Pattern. I agree with the choice, however the explanation is kinda confused, and for someone who is not familiar with GOF design patterns it will be really hard to understand.
