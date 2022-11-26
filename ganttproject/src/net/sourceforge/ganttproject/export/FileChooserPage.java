@@ -35,11 +35,13 @@ import biz.ganttproject.core.option.GPOptionGroup;
 import net.sourceforge.ganttproject.IGanttProject;
 import net.sourceforge.ganttproject.document.Document;
 import net.sourceforge.ganttproject.export.ExportFileWizardImpl.State;
+import net.sourceforge.ganttproject.export.ExporterToGoogleCalendar;
 import net.sourceforge.ganttproject.filter.ExtensionBasedFileFilter;
 import net.sourceforge.ganttproject.gui.FileChooserPageBase;
 import net.sourceforge.ganttproject.gui.UIUtil;
 import net.sourceforge.ganttproject.gui.projectwizard.WizardImpl;
 import net.sourceforge.ganttproject.language.GanttLanguage;
+
 
 class FileChooserPage extends FileChooserPageBase {
 
@@ -59,12 +61,18 @@ class FileChooserPage extends FileChooserPageBase {
 
   @Override
   protected String getFileChooserTitle() {
-    return GanttLanguage.getInstance().getText("selectFileToExport");
+    if (myState.getExporter().getCustomOptionsUI() != null)
+      return "Select Google Account";
+    else
+      return GanttLanguage.getInstance().getText("selectFileToExport");
   }
 
   @Override
   public String getTitle() {
-    return GanttLanguage.getInstance().getText("selectFileToExport");
+    if (myState.getExporter().getCustomOptionsUI() != null)
+      return "Select Google Account";
+    else
+      return GanttLanguage.getInstance().getText("selectFileToExport");
   }
 
   @Override
@@ -175,6 +183,7 @@ class FileChooserPage extends FileChooserPageBase {
     return new ExtensionBasedFileFilter(myState.getExporter().getFileNamePattern(),
         myState.getExporter().getFileTypeDescription());
   }
+
 
   @Override
   protected GPOptionGroup[] getOptionGroups() {

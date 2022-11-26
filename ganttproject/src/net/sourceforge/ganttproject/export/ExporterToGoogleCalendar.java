@@ -19,6 +19,7 @@ along with GanttProject.  If not, see <http://www.gnu.org/licenses/>.
 package net.sourceforge.ganttproject.export;
 
 import java.awt.Component;
+import javax.swing.JButton;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
@@ -134,7 +135,7 @@ public class ExporterToGoogleCalendar extends ExporterBase {
 
     @Override
     public Component getCustomOptionsUI() {
-        return null;
+        return new JButton("Login in Google Account");
     }
 
     @Override
