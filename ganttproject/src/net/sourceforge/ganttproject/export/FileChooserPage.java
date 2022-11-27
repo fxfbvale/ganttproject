@@ -68,6 +68,12 @@ class FileChooserPage extends FileChooserPageBase {
   }
 
   @Override
+  protected boolean googleCalendarSelected(){
+    return myState.getExporter() instanceof ExporterToGoogleCalendar;
+  }
+
+  //ver onde e que este getTitle é usado
+  @Override
   public String getTitle() {
     if (myState.getExporter().getCustomOptionsUI() != null)
       return "Select Google Account";
@@ -148,6 +154,7 @@ class FileChooserPage extends FileChooserPageBase {
     Component customUI = myState.getExporter().getCustomOptionsUI();
     return customUI == null ? super.createSecondaryOptionsPanel() : customUI;
   }
+
 
   static File proposeOutputFile(IGanttProject project, Exporter exporter) {
     String proposedExtension = exporter.proposeFileExtension();

@@ -85,6 +85,7 @@ public abstract class ExporterBase implements Exporter {
     return myUIFacade;
   }
 
+
   public GPAction getActions() {
     return null;
   }
@@ -110,6 +111,7 @@ public abstract class ExporterBase implements Exporter {
     // By default use the same
     return getFileExtensions();
   }
+
 
   public GanttExportSettings createExportSettings() {
     GanttExportSettings result = new GanttExportSettings();
