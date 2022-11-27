@@ -1,2 +1,0 @@
-	Reviewed by: Luís Abreu: Hi Tiago, you forgot to put the name of the metrics you chose and there is a description of something at the beginning of your metrics that is not identified too. I would also develop a little bit more the conclusion you made based on the values of the graphics of this metric.	
-	Other than that, the descriptions of the concepts present in this metric are well described, good work! 
