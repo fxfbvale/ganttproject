@@ -42,10 +42,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.Arrays;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+
 
 
 import java.awt.Component;
 import javax.swing.*;
+import java.awt.Dimension;
 import java.awt.BorderLayout;
 import java.awt.image.RenderedImage;
 import java.io.File;
@@ -169,28 +174,49 @@ public class ExporterToGoogleCalendar extends ExporterBase {
         return Collections.singletonList(createExportRangeOptionGroup());
     }
 
+    private boolean userLoggedIn(){
+        File storedCredentials = new File("tokens/StoredCredential");
+        return storedCredentials.exists();
+    }
 
 
     @Override
     public Component getCustomOptionsUI() {
-        JPanel panel = new JPanel();
+        JPanel mainPanel = new JPanel();
+        mainPanel.setBorder(BorderFactory.createTitledBorder("Google Account where to export project"));
+        mainPanel.setPreferredSize(new Dimension(400, 100));
+        JPanel labelPanel = new JPanel();
+        JPanel buttonPanel = new JPanel();
+        mainPanel.add(labelPanel, BorderLayout.LINE_START);
+        mainPanel.add(buttonPanel, BorderLayout.LINE_END);
         JLabel emailInfo = new JLabel();
-        emailInfo.setText("No account logged in");
-        JButton loginButton = new JButton("Login in Google Account");
-        panel.add( emailInfo, BorderLayout.PAGE_START );
-        panel.add( loginButton, BorderLayout.LINE_START );
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try{
-                    GoogleCalendar gc = new GoogleCalendar();
-                    gc.login();
-                }catch (Exception E){
-                    E.printStackTrace(System.out);
+        try{
+            GoogleCalendar gc = new GoogleCalendar();
+            //gc.login();
+            emailInfo.setText(userLoggedIn() ? gc.getLoggedInUser() : "No account connect yet." );
+            JButton loginButton = new JButton(userLoggedIn() ? "Change Google account" : "Login in Google account");
+            labelPanel.add( emailInfo, BorderLayout.LINE_START );
+            mainPanel.add( loginButton, BorderLayout.LINE_START );
+            loginButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        File storedCredentials = new File("tokens/StoredCredential");
+                        System.out.println(storedCredentials.delete());
+                        gc.login();
+                        if(userLoggedIn()) {
+                            emailInfo.setText(gc.getLoggedInUser());
+                            loginButton.setText("Change Google account");
+                        }
+                    }catch (Exception E){
+                        E.printStackTrace(System.out);
+                    }
                 }
-            }
-        });
-        return panel;
+            });
+        }catch (Exception E){
+            E.printStackTrace(System.out);
+        }
+        return mainPanel;
     }
 
     @Override
@@ -209,22 +235,30 @@ public class ExporterToGoogleCalendar extends ExporterBase {
         ExporterJob result = new ExporterJob("Export project") {
             @Override
             protected IStatus run() {
-                Chart chart = getUIFacade().getActiveChart();
-
-                // Test if there is an active chart
-                if (chart == null) {
-                    // If not, it means we are running CLI
-                    String chartToExport = getPreferences().get("chart", null);
-
-                    // Default is to print Gantt chart
-                    chart = "resource".equals(chartToExport) ? getResourceChart() : getGanttChart();
-                }
-                RenderedImage renderedImage = chart.getRenderedImage(createExportSettings());
+                OutputStream outputStream = null;
                 try {
-                    ImageIO.write(renderedImage, myFileTypeOption.proposeFileExtension(), outputFile);
-                } catch (IOException e) {
+                    System.out.println(getProject());
+                    /*
+                    outputFile.createNewFile();
+                    outputStream = new BufferedOutputStream(new FileOutputStream(outputFile));
+                    // TODO Fix this ugly hack!! Ie make the settings available in a proper way
+                    GanttCSVExport exporter = new GanttCSVExport(getProject(),
+                            ((GanttProject) getProject()).getGanttOptions().getCSVOptions());
+                    exporter.save(outputStream);
+                    outputStream.flush();
+                    */
+
+                } catch (Exception e) {
                     getUIFacade().showErrorDialog(e);
                     return Status.CANCEL_STATUS;
+                } finally {
+                    if (outputStream != null) {
+                        try {
+                            outputStream.close();
+                        } catch (IOException e) {
+                            System.out.println("Error exporting");
+                        }
+                    }
                 }
                 return Status.OK_STATUS;
             }

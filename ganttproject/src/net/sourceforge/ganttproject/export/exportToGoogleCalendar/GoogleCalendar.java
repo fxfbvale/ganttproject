@@ -18,6 +18,7 @@ import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.EventReminder;
 import com.google.api.services.calendar.model.Events;
 
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,6 +50,8 @@ public class GoogleCalendar {
     private static final List<String> SCOPES =
             Collections.singletonList(CalendarScopes.CALENDAR);
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
+
+    private static Calendar service;
 
     public GoogleCalendar() throws IOException, GeneralSecurityException {
 
@@ -126,14 +129,32 @@ public class GoogleCalendar {
         System.out.printf("Event created: %s\n", event.getHtmlLink());
     }
 
-    public static void login() throws IOException, GeneralSecurityException {
-        // Build a new authorized API client service.
-
+    public String getLoggedInUser() throws IOException, GeneralSecurityException{
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+
         Calendar service =
                 new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
                         .setApplicationName(APPLICATION_NAME)
                         .build();
+
+        com.google.api.services.calendar.model.Calendar calendar =
+                service.calendars().get("primary").execute();
+
+        return calendar.getSummary();
+
+    }
+
+    public static void login() throws IOException, GeneralSecurityException {
+        // Build a new authorized API client service.
+
+        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+
+        Calendar service =
+                new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+                        .setApplicationName(APPLICATION_NAME)
+                        .build();
+
+
 
     //System.out.println("aqui?");
         //createEvent(service);
