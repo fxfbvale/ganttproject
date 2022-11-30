@@ -45,7 +45,8 @@ import java.util.Arrays;
 
 
 import java.awt.Component;
-import javax.swing.JButton;
+import javax.swing.*;
+import java.awt.BorderLayout;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.text.MessageFormat;
@@ -172,7 +173,12 @@ public class ExporterToGoogleCalendar extends ExporterBase {
 
     @Override
     public Component getCustomOptionsUI() {
+        JPanel panel = new JPanel();
+        JLabel emailInfo = new JLabel();
+        emailInfo.setText("No account logged in");
         JButton loginButton = new JButton("Login in Google Account");
+        panel.add( emailInfo, BorderLayout.PAGE_START );
+        panel.add( loginButton, BorderLayout.LINE_START );
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -184,7 +190,7 @@ public class ExporterToGoogleCalendar extends ExporterBase {
                 }
             }
         });
-        return loginButton;
+        return panel;
     }
 
     @Override

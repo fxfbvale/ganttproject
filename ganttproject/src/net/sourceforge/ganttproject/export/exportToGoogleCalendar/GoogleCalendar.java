@@ -135,8 +135,8 @@ public class GoogleCalendar {
                         .setApplicationName(APPLICATION_NAME)
                         .build();
 
-    System.out.println("aqui?");
-        createEvent(service);
+    //System.out.println("aqui?");
+        //createEvent(service);
 
     }
 }
