@@ -18,20 +18,44 @@ along with GanttProject.  If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sourceforge.ganttproject.export;
 
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
+import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.gson.GsonFactory;
+import com.google.api.client.util.DateTime;
+import com.google.api.client.util.store.FileDataStoreFactory;
+import com.google.api.services.calendar.CalendarScopes;
+import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.EventDateTime;
+import com.google.api.services.calendar.model.EventReminder;
+import com.google.api.services.calendar.model.Events;
+
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.security.GeneralSecurityException;
+import java.util.Arrays;
+
+
 import java.awt.Component;
 import javax.swing.JButton;
 import java.awt.image.RenderedImage;
 import java.io.File;
-import java.io.IOException;
 import java.text.MessageFormat;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+
 import javax.imageio.ImageIO;
-
 import java.awt.event.ActionEvent;
-
+import java.awt.event.ActionListener;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -58,6 +82,17 @@ public class ExporterToGoogleCalendar extends ExporterBase {
         FileTypeOption() {
             super("impex.image.fileformat");
         }
+
+        private static final String APPLICATION_NAME = "Google Calendar API Java Quickstart";
+        private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
+        private static final String TOKENS_DIRECTORY_PATH = "tokens";
+        private static final List<String> SCOPES = Collections.singletonList("https://www.googleapis.com/auth/calendar");
+        private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
+
+
+
+
+
 
         @Override
         public String[] getAvailableValues() {
@@ -133,9 +168,23 @@ public class ExporterToGoogleCalendar extends ExporterBase {
         return Collections.singletonList(createExportRangeOptionGroup());
     }
 
+
+
     @Override
     public Component getCustomOptionsUI() {
-        return new JButton("Login in Google Account");
+        JButton loginButton = new JButton("Login in Google Account");
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    GoogleCalendar gc = new GoogleCalendar();
+                    gc.login();
+                }catch (Exception E){
+                    E.printStackTrace(System.out);
+                }
+            }
+        });
+        return loginButton;
     }
 
     @Override
