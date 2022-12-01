@@ -1,0 +1,90 @@
+	Use Cases reviews
+
+Luís Abreus Use Cases Reviews
+
+
+Francisco Vale: The UseCases themselves seemed pretty well done, however in the diagrams I would change some aspects:
+    The first diagram should have a main UseCase from which all the others would inherit all the behaviors of that use case (like in class inherits), named Manage Project.
+    The name of the main use case in the second UseCase diagram could be more explicit like Edit Properties
+    Finally in the third UseCase diagram the name could also be more explicit like, for example, Export Project, since that’s the name that resides in the first diagram.
+    
+
+Tiago Francisco Use Cases Reviews
+
+
+Pedro Gouveia: I think that everything looks great and at least I agree with it. I just think that you should change your “Main flow” descriptions so they are a little bit more understandable. 
+
+Francisco Vale: In general everything is fine but I would change all the UseCases where you talk about functionalities instead of tabs or options. Also in the diagrams I would change for something more specific like Open About Option or Tab instead of only About / Help.
+
+
+Pedro Gouveia Use Cases Reviews
+
+
+Guilherme Franco: I think the diagram is easy to follow, the use cases that didn’t fit in the more general diagram were placed in a sub diagram, which helped it stay organized. The use cases are clear and he made descriptions of all the use cases where a person could be more confused as to how they would work so I think he did a great job.
+
+Francisco Vale: All the UseCases seem really well explained, however in the Diagrams I could find two problems. The first one stands in the first diagram that should have a main UseCase, like in the comment I did to Luis Abreu, called, for example, Edit Resources, from where, all the other Use Cases would inherit their behaviors. The other problem was with the Email provider Actor. There is a line that is intersected so you do not know if you need the two actors to begin the sue case or if the lines should not intersect.
+
+
+
+Guilherme Franco Use Cases Reviews
+
+
+Luís Abreu: I think both use case diagrams are very explicit and easy to understand. Furthermore, they are very complete once they contain all the functionalities of the system on the topic.
+    Now about the use case descriptions and information: I think you chose the use cases well to do the description on, because you covered all the different “types”, what I mean with this is you chose one abstract use case, one that was included and another that was a specification. I liked that you added a section to each alternative flow too. Overall all the descriptions of the use cases are on point and the main flows are detailed.
+Good work Guilherme!	
+
+Francisco Vale: All the UseCases are well explained. However, as I stated in two previous diagrams (Luis Abreu and Pedro Gouveia), the first diagram, as is really well done in the second one, should have a main UseCase, named, fro example, Edit Task, from which all the other use cases would inherit its behavior and connections.
+
+
+Francisco Vale Use Cases Reviews
+
+
+Luís Abreu: Hi Francisco,I think the use case diagrams are well conceived and I agree with their content. I  just think it would be more clear and presentable if the abstract  Use Case Settings and its implementations could be in another diagram.
+
+Tiago Francisco: Dividing it in three different diagrams was a good idea because something that could be confusing became more clear. Someone that doesn't know how the implementation was made can easily get to realize it by analyzing these diagrams. I would only change the Edit diagram name to something more specific.
+
+
+Export to Calendar Use Case Review - Pedro Gouveia
+
+
+Francisco Vale: It is really well done, I would just change the name of the UseCase to Export to Google Calendar, so it would be more explicit. Other than that is really well organized.
+
+
+
+Export Burndown Chart to XLSX Use Case Review - Francisco Vale
+
+
+Guilherme Franco: It’s pretty well organized, It seems clear and concise.
+
+
+	Metrics reviews
+
+Luís Abreu Metrics Reviews
+
+
+Guilherme Franco: I like the fact that we can see the table with every package and their respective score by metric, it really helps to know exactly where the problems are. Other than that I agree with the way everything is explained but I would suggest more data visualization techniques so it’s easier to understand each metric.
+
+
+Francisco Vale Metrics Reviews
+
+
+Luís Abreu: All the concepts present in this metric are well explained. Furthermore, the analysis that Francisco did to the class Task and the relation to a possible code smell is very well identified and explained.
+
+
+Pedro Gouveia Metrics Reviews
+
+
+Guilherme Franco: I like the fact that we can see the table with every package and their respective score by metric, it really helps to know exactly where the problems are. Other than that I agree with the way everything is explained but I would suggest more data visualization techniques so it’s easier to understand each metric.
+
+
+Tiago Francisco Metrics Reviews
+
+
+Luís Abreu: Hi Tiago, you forgot to put the name of the metrics you chose and there is a description of something at the beginning of your metrics that is not identified too. I would also develop a little bit more the conclusion you made based on the values of the graphics of this metric.	Other than that, the descriptions of the concepts present in this metric are well described, good work! 
+Francisco Vale: It is well explained and I liked the way that you analyzed it by concluding one of the many code smells present in this application.
+
+
+Guilherme Franco Metrics Reviews
+
+
+Pedro Gouveia: I think that this review of the Chidamber-Kemerer metrics is very well done and extensive, when I started reading this piece I had no idea of what these metrics were or for what they were used and if they were important for our project but after reading this I was more aware of the code smells I might encounter and prepared for them. 

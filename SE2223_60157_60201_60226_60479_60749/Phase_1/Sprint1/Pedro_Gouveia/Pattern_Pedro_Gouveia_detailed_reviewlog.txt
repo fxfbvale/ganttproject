@@ -1,0 +1,8 @@
+The facade Design Pattern is well justified allowing even a person with no background in IT to understand it.
+Signed: Guilherme Franco
+
+The second design pattern (observer) is well presented and nothing needs to be corrected.
+Signed: Tiago Francisco
+
+After the changes from my previous review I agree with the chosen design pattern and it’s well written, making it easy to understand, even for someone not familiar with GOF design patterns.
+Signed: Francisco Vale

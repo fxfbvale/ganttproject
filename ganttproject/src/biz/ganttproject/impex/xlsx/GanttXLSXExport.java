@@ -72,6 +72,7 @@ public class GanttXLSXExport {
     private int projDuration;
     private int totalEffort;
     private double remainingEffort;
+    private boolean goodPace;
 
 
 
@@ -87,6 +88,7 @@ public class GanttXLSXExport {
         this.projDuration = myTaskManager.getProjectLength().getLength();
         this.remainingEffort = 0;
         this.totalEffort = 0;
+        this.goodPace = false;
     }
 
     public void createChart(final File output) throws Exception {
@@ -138,8 +140,12 @@ public class GanttXLSXExport {
                         }
                     }
                 }
-            remainingEffort -= dayEffort;
-            worksheet.getCells().get(1, i + 1).putValue(remainingEffort); //removing the same amount everytime
+                remainingEffort -= dayEffort;
+                worksheet.getCells().get(1, i + 1).putValue(remainingEffort); //removing the same amount everytime
+                if(day.compareTo(calendar) == 0 && remainingEffort <= totalEffort - i*x)
+                    goodPace = true;
+                else
+                    goodPace = false;
             }
         }
 
@@ -177,14 +183,24 @@ public class GanttXLSXExport {
 
         // Set properties of background area and series markers
         chart.getNSeries().get(s2_idx).getArea().setFormatting(FormattingType.CUSTOM);
-        chart.getNSeries().get(s2_idx).getMarker().getArea().setForegroundColor(Color.getYellow());
+        if(goodPace) {
+            chart.getNSeries().get(s2_idx).getMarker().getArea().setForegroundColor(Color.getBlue());
+            chart.getNSeries().get(s2_idx).getBorder().setColor(Color.getBlue());
+        }
+        else{
+            chart.getNSeries().get(s2_idx).getMarker().getArea().setForegroundColor(Color.getOrangeRed());
+            chart.getNSeries().get(s2_idx).getBorder().setColor(Color.getOrangeRed());
+        }
         chart.getNSeries().get(s2_idx).getMarker().getBorder().setVisible(false);
-        chart.getNSeries().get(s2_idx).getBorder().setColor(Color.getOrangeRed());
 
 
         // Set properties of background area and series markers
         chart.getNSeries().get(s3_idx).getArea().setFormatting(FormattingType.CUSTOM);
+        chart.getNSeries().get(s3_idx).getMarker().getArea().setForegroundColor(Color.getGreen());
         chart.getNSeries().get(s3_idx).getBorder().setColor(Color.getGreen());
+        chart.getNSeries().get(s3_idx).getMarker().setMarkerSize(2);
+        chart.getNSeries().get(s3_idx).getMarker().getBorder().setVisible(false);
+
 
 
         // Setting the foreground color of the plot area

@@ -1,0 +1,7 @@
+Reviewed by: Pedro Gouveia: Both the use case diagram and respective descriptions could not have 
+been better produced and conceptualized, it is very easy for me and for anyone who does not have any 
+software engineering experience to understand the main concepts and what-ifs behind this part of the program. 
+
+Reviewed by: Luís Abreu: The use case diagram as well as the descriptions of all 4 use cases used in the 
+respective diagram are very clear  and well structured. It is very easy to understand all the information
+presented in the diagram
