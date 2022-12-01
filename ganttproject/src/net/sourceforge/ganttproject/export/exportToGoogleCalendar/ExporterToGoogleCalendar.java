@@ -81,6 +81,14 @@ import net.sourceforge.ganttproject.action.GPAction;
 
 public class ExporterToGoogleCalendar extends ExporterBase {
 
+    public static final String EXPORT_PANEL_TITLE = "Google Account where to export project";
+    public static final String NO_ACCOUNT_CONNECTED_YET = "No account connected yet.";
+    public static final String ERROR_EXPORTING = "Error exporting";
+    public static final java.lang.String YOU_MUST_FIRST_SELECT_A_GOOGLE_ACCOUNT_TO_EXPORT_THE_PROJECT_TO = "You must first select a Google account to export the project to.";
+    public static final String TOKENS_PATH = "tokens/StoredCredential";
+    public static final String CHANGE_GOOGLE_ACCOUNT = "Change Google account";
+    public static final String LOGIN_IN_GOOGLE_ACCOUNT = "Login in Google account";
+
     static class FileTypeOption extends GPAbstractOption<String> implements EnumerationOption {
         static final String[] FILE_FORMAT_ID = new String[] { "impex.image.fileformat.png", "impex.image.fileformat.jpeg" };
 
@@ -154,14 +162,8 @@ public class ExporterToGoogleCalendar extends ExporterBase {
                 new Object[] { proposeFileExtension() });
     }
 
-    private final GPAction myActions = new GPAction("Login in Google Account") {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("o abreu é gay");
-        }
-    };
     public GPAction getActions() {
-        return myActions;
+        return null;
     }
 
     @Override
@@ -174,8 +176,11 @@ public class ExporterToGoogleCalendar extends ExporterBase {
         return Collections.singletonList(createExportRangeOptionGroup());
     }
 
+    /*
+    Returns if there is a user logged in the system.
+     */
     private boolean userLoggedIn(){
-        File storedCredentials = new File("tokens/StoredCredential");
+        File storedCredentials = new File(TOKENS_PATH);
         return storedCredentials.exists();
     }
 
@@ -183,7 +188,7 @@ public class ExporterToGoogleCalendar extends ExporterBase {
     @Override
     public Component getCustomOptionsUI() {
         JPanel mainPanel = new JPanel();
-        mainPanel.setBorder(BorderFactory.createTitledBorder("Google Account where to export project"));
+        mainPanel.setBorder(BorderFactory.createTitledBorder(EXPORT_PANEL_TITLE));
         mainPanel.setPreferredSize(new Dimension(400, 100));
         JPanel labelPanel = new JPanel();
         JPanel buttonPanel = new JPanel();
@@ -192,21 +197,22 @@ public class ExporterToGoogleCalendar extends ExporterBase {
         JLabel emailInfo = new JLabel();
         try{
             GoogleCalendar gc = new GoogleCalendar();
-            //gc.login();
-            emailInfo.setText(userLoggedIn() ? gc.getLoggedInUser() : "No account connected yet." );
-            JButton loginButton = new JButton(userLoggedIn() ? "Change Google account" : "Login in Google account");
+            emailInfo.setText(userLoggedIn() ? gc.getLoggedInUser() : NO_ACCOUNT_CONNECTED_YET);
+            JButton loginButton = new JButton(userLoggedIn() ? CHANGE_GOOGLE_ACCOUNT : LOGIN_IN_GOOGLE_ACCOUNT);
             labelPanel.add( emailInfo, BorderLayout.LINE_START );
             mainPanel.add( loginButton, BorderLayout.LINE_START );
             loginButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        File storedCredentials = new File("tokens/StoredCredential");
-                        System.out.println(storedCredentials.delete());
+                        //delete the file of stored credentials in order to change accounts.
+                        File storedCredentials = new File(TOKENS_PATH);
+                        storedCredentials.delete();
                         gc.login();
                         if(userLoggedIn()) {
+                            //change name and button.
                             emailInfo.setText(gc.getLoggedInUser());
-                            loginButton.setText("Change Google account");
+                            loginButton.setText(CHANGE_GOOGLE_ACCOUNT);
                         }
                     }catch (Exception E){
                         E.printStackTrace(System.out);
@@ -226,42 +232,33 @@ public class ExporterToGoogleCalendar extends ExporterBase {
 
     @Override
     protected ExporterJob[] createJobs(final File outputFile, List<File> resultFiles) {
-        ExporterJob job = createImageExportJob(outputFile);
+        ExporterJob job = createCalendarExportJob(outputFile);
         resultFiles.add(outputFile);
         return new ExporterJob[] { job };
     }
 
-    private ExporterJob createImageExportJob(final File outputFile) {
+    private ExporterJob createCalendarExportJob(final File outputFile) {
         ExporterJob result = new ExporterJob("Export project") {
             @Override
             protected IStatus run() {
                 OutputStream outputStream = null;
                 try {
                     if(!userLoggedIn()){
-                        getUIFacade().showErrorDialog("You must first select a Google account to export the project to.");
+                        //Dont let the user export if it is not logged in.
+                        getUIFacade().showErrorDialog(YOU_MUST_FIRST_SELECT_A_GOOGLE_ACCOUNT_TO_EXPORT_THE_PROJECT_TO);
                         return Status.CANCEL_STATUS;
                     }
                     GoogleCalendar gc = new GoogleCalendar();
                     TaskManager tm = getProject().getTaskManager();
                     for (Task task : tm.getTasks()) {
+                        //for every task create an event.
                         String name = task.getName();
                         String start = task.getStart().toString();
                         String end = task.getDisplayEnd().toString();
                         String cost = task.getCost().getValue().toPlainString();
-                        String res = "";
                         ResourceAssignment[] resourceAssignments = task.getAssignments();
                         gc.createEvent(name,start,end,cost,resourceAssignments);
                     }
-                    /*
-                    outputFile.createNewFile();
-                    outputStream = new BufferedOutputStream(new FileOutputStream(outputFile));
-                    // TODO Fix this ugly hack!! Ie make the settings available in a proper way
-                    GanttCSVExport exporter = new GanttCSVExport(getProject(),
-                            ((GanttProject) getProject()).getGanttOptions().getCSVOptions());
-                    exporter.save(outputStream);
-                    outputStream.flush();
-                    */
-
                 } catch (Exception e) {
                     getUIFacade().showErrorDialog(e);
                     return Status.CANCEL_STATUS;
@@ -270,7 +267,7 @@ public class ExporterToGoogleCalendar extends ExporterBase {
                         try {
                             outputStream.close();
                         } catch (IOException e) {
-                            System.out.println("Error exporting");
+                            System.out.println(ERROR_EXPORTING);
                         }
                     }
                 }

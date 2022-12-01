@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
 
-/* class to demonstarte use of Calendar events list API */
+/* Class that implements the functionalities connected with the Google Calendar API */
 public class GoogleCalendar {
     /**
      * Application name.
@@ -62,6 +62,23 @@ public class GoogleCalendar {
 
     }
 
+    // Build a new authorized API client service.
+    private static Calendar createService() throws IOException, GeneralSecurityException{
+        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+
+        Calendar service =
+                new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+                        .setApplicationName(APPLICATION_NAME)
+                        .build();
+
+        return service;
+    }
+
+    /**
+     *
+     * @param numbr - the number to be added a zero at the left if its less than 10.
+     * @return the modified String.
+     */
     private static String addZero(String numbr){
         return Integer.valueOf(numbr) < 10 ? "0" + numbr : numbr;
     }
@@ -96,16 +113,23 @@ public class GoogleCalendar {
         return credential;
     }
 
+    /**
+     *
+     * @param name - name of the task.
+     * @param beginDate - begin date of the task.
+     * @param endDate - end date of the task.
+     * @param cost - cost of the task.
+     * @param resourceAssignments - the resources assigned to this task.
+     * @throws IOException
+     * @throws GeneralSecurityException
+     */
     public static void createEvent(String name, String beginDate, String endDate, String cost, ResourceAssignment[] resourceAssignments) throws IOException, GeneralSecurityException {
-        // Refer to the Java quickstart on how to setup the environment:
-// https://developers.google.com/calendar/quickstart/java
-// Change the scope to CalendarScopes.CALENDAR and delete any stored
-// credentials.
 
-        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
 
+        //List of the event attendees to be added to the event.
         List<EventAttendee> attendees = new ArrayList<>();
 
+        //Add resources as attendees.
         for (int i = 0; i < resourceAssignments.length; i++) {
             EventAttendee eventAttendee = new EventAttendee();
             eventAttendee.setEmail(resourceAssignments[i].getResource().getMail());
@@ -113,11 +137,8 @@ public class GoogleCalendar {
             attendees.add(eventAttendee);
         }
 
-
-        Calendar service =
-                new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
-                        .setApplicationName(APPLICATION_NAME)
-                        .build();
+        // Build a new authorized API client service.
+        service = createService();
 
         Event event = new Event()
                 .setSummary(name)
@@ -128,7 +149,7 @@ public class GoogleCalendar {
         String beginDay = addZero(beginParts[1]);
         String beginYear = "20" + addZero(beginParts[2]);
 
-
+        //Set start time in the first day at midnight.
         DateTime startDateTime = new DateTime(beginYear+"-"+beginMonth+"-"+beginDay+"T00:00:00.00Z");
         EventDateTime start = new EventDateTime()
                 .setDateTime(startDateTime)
@@ -141,6 +162,7 @@ public class GoogleCalendar {
         String endYear = "20" + addZero(endParts[2]);
 
 
+        //Set the end time at the last day last minute.
         DateTime endDateTime = new DateTime(endYear+"-"+endMonth+"-"+endDay+"T24:00:00.00Z");
         EventDateTime end = new EventDateTime()
                 .setDateTime(endDateTime)
@@ -149,8 +171,8 @@ public class GoogleCalendar {
 
         event.setAttendees(attendees);
 
+        //Set the reminders
         EventReminder[] reminderOverrides = new EventReminder[] {
-                new EventReminder().setMethod("email").setMinutes(24 * 60),
                 new EventReminder().setMethod("popup").setMinutes(10),
         };
 
@@ -164,13 +186,11 @@ public class GoogleCalendar {
         System.out.printf("Event created: %s\n", event.getHtmlLink());
     }
 
+    /*
+    Returns the logged in user in the system.
+     */
     public String getLoggedInUser() throws IOException, GeneralSecurityException{
-        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-
-        Calendar service =
-                new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
-                        .setApplicationName(APPLICATION_NAME)
-                        .build();
+        Calendar service = createService();
 
         com.google.api.services.calendar.model.Calendar calendar =
                 service.calendars().get("primary").execute();
@@ -180,19 +200,6 @@ public class GoogleCalendar {
     }
 
     public static void login() throws IOException, GeneralSecurityException {
-        // Build a new authorized API client service.
-
-        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-
-        Calendar service =
-                new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
-                        .setApplicationName(APPLICATION_NAME)
-                        .build();
-
-
-
-    //System.out.println("aqui?");
-        //createEvent(service);
-
+        createService();
     }
 }
