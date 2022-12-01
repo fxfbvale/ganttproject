@@ -1,0 +1,1 @@
+	Luís Abreu: All the concepts present in this metric are well explained. Furthermore, the analysis that Francisco did to the class Task and the relation to a possible code smell is very well identified and explained.
