@@ -12,6 +12,9 @@
       <library name="lib/core/AppleJavaExtensions.jar">
          <export name="*"/>
       </library>
+      <library name="lib/core/aspose-cells-22.10.jar">
+         <export name="*"/>
+      </library>
       <library name="lib/core/balloontip-1.2.4.1.jar">
          <export name="*"/>
       </library>
@@ -116,6 +119,7 @@
    <extension point="net.sourceforge.ganttproject.exporter">
       <exporter class="net.sourceforge.ganttproject.export.ExporterToImage"/>
       <exporter class="net.sourceforge.ganttproject.export.ExporterToCSV"/>
+      <exporter class="net.sourceforge.ganttproject.export.ExporterToXLSX"/>
    </extension>
    <extension point="net.sourceforge.ganttproject.exporter">
       <exporter class="net.sourceforge.ganttproject.export.ExporterToGoogleCalendar"/>
