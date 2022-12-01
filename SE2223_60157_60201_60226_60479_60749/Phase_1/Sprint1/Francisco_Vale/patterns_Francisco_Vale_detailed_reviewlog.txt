@@ -1,0 +1,9 @@
+Review done by Luís Abreu:
+ I reviewed the Design Pattern 3: Visitor Design Pattern. I agree with everything.
+
+I reviewed the Design Pattern 2: Chain of Responsibility Design Pattern.
+The several calls are explicit and the explanation is clear, I agree with what was said.
+Signed: Guilherme Franco.
+
+Review done by Pedro Gouveia:
+I reviewed the design pattern template method and I couldn't agree more with it, everything about it is well explained even for a person not familiarized with GOF design patterns. 

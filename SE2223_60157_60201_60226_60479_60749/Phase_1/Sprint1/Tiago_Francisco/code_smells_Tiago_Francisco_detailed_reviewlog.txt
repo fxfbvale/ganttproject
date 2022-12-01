@@ -1,0 +1,9 @@
+Review done by Luís Abreu:
+    I reviewed the Code Smell: Dead Code. I think its well identified. I would just use Guilherme Franco's structure of presentation, the rest is good in my opinion.
+    
+Review done by Pedro Gouveia:
+    I reviewed the Code Smell: Speculative Generality. 
+    I think this code smell is on the spot, it should not definetly be there, as it is something that is not happening in the present and if it happens in the future it may be a reason for a lot of hours spent finding the bug, as the error would just be catched and the coder would not know about it.
+
+Related to the review of the third code smell. After the changes i think it is really good, the explanation is a bit too long but is really well writen and also well described.
+Signed: Francisco Vale
