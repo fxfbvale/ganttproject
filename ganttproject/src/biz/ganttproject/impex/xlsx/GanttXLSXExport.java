@@ -184,8 +184,8 @@ public class GanttXLSXExport {
         // Set properties of background area and series markers
         chart.getNSeries().get(s2_idx).getArea().setFormatting(FormattingType.CUSTOM);
         if(goodPace) {
-            chart.getNSeries().get(s2_idx).getMarker().getArea().setForegroundColor(Color.getAquamarine());
-            chart.getNSeries().get(s2_idx).getBorder().setColor(Color.getAquamarine());
+            chart.getNSeries().get(s2_idx).getMarker().getArea().setForegroundColor(Color.getBlue());
+            chart.getNSeries().get(s2_idx).getBorder().setColor(Color.getBlue());
         }
         else{
             chart.getNSeries().get(s2_idx).getMarker().getArea().setForegroundColor(Color.getOrangeRed());
@@ -194,10 +194,13 @@ public class GanttXLSXExport {
         chart.getNSeries().get(s2_idx).getMarker().getBorder().setVisible(false);
 
 
-
         // Set properties of background area and series markers
         chart.getNSeries().get(s3_idx).getArea().setFormatting(FormattingType.CUSTOM);
+        chart.getNSeries().get(s3_idx).getMarker().getArea().setForegroundColor(Color.getGreen());
         chart.getNSeries().get(s3_idx).getBorder().setColor(Color.getGreen());
+        chart.getNSeries().get(s3_idx).getMarker().setMarkerSize(2);
+        chart.getNSeries().get(s3_idx).getMarker().getBorder().setVisible(false);
+
 
 
         // Setting the foreground color of the plot area
