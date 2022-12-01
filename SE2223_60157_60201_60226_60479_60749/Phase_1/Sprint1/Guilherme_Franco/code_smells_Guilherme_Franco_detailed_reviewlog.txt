@@ -10,4 +10,3 @@ Review done by Pedro Gouveia:
     I think my colleague did an excelent job at finding this code smell. This is a very bad practice and should be fixed.
     The rationale is very well explained but in the refractoring I think Guilherme did an error by mentioning the comboBox as "jumbo box".
 
-

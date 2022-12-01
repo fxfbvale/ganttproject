@@ -1,0 +1,8 @@
+The location is well defined and the rationale behind the pattern is justified so I agree with what has been said in the document regarding the first Design Pattern found (Memento Pattern).
+Signed: Guilherme Franco
+
+The second pattern is well presented, I would just try to do the rationale a little more specific.
+Signed: Tiago Francisco
+
+Related to the third design pattern we can easily see that this is actually a Facade Design Patern. As Tiago said I would try to make the Rationale a bit more incident in this specific case, instead of being a general description of what the Facade Design Pattern stands for.
+Signed: Francisco Vale
