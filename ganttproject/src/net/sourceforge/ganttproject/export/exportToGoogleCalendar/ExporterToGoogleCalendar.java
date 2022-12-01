@@ -193,7 +193,7 @@ public class ExporterToGoogleCalendar extends ExporterBase {
         try{
             GoogleCalendar gc = new GoogleCalendar();
             //gc.login();
-            emailInfo.setText(userLoggedIn() ? gc.getLoggedInUser() : "No account connect yet." );
+            emailInfo.setText(userLoggedIn() ? gc.getLoggedInUser() : "No account connected yet." );
             JButton loginButton = new JButton(userLoggedIn() ? "Change Google account" : "Login in Google account");
             labelPanel.add( emailInfo, BorderLayout.LINE_START );
             mainPanel.add( loginButton, BorderLayout.LINE_START );
