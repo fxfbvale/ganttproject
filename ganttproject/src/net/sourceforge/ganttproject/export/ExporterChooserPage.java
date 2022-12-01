@@ -27,9 +27,35 @@ import javax.swing.Action;
 
 import biz.ganttproject.core.option.GPOptionGroup;
 
+import net.sourceforge.ganttproject.action.GPAction;
 import net.sourceforge.ganttproject.export.ExportFileWizardImpl.State;
 import net.sourceforge.ganttproject.gui.options.GPOptionChoicePanel;
 import net.sourceforge.ganttproject.gui.projectwizard.WizardPage;
+import net.sourceforge.ganttproject.language.GanttLanguage;
+import net.sourceforge.ganttproject.gui.UIFacade.Centering;
+
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Map;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+
+import com.google.common.collect.Maps;
+
+import net.sourceforge.ganttproject.action.CancelAction;
+import net.sourceforge.ganttproject.action.GPAction;
+import net.sourceforge.ganttproject.action.OkAction;
+import net.sourceforge.ganttproject.gui.UIFacade;
+import net.sourceforge.ganttproject.gui.UIFacade.Centering;
+import net.sourceforge.ganttproject.gui.UIFacade.Dialog;
+import net.sourceforge.ganttproject.gui.options.TopPanel;
 import net.sourceforge.ganttproject.language.GanttLanguage;
 
 /**
@@ -37,7 +63,6 @@ import net.sourceforge.ganttproject.language.GanttLanguage;
  */
 class ExporterChooserPage implements WizardPage {
   private final List<Exporter> myExporters;
-
   private final State myState;
   private final GanttLanguage language = GanttLanguage.getInstance();
 
@@ -68,11 +93,19 @@ class ExporterChooserPage implements WizardPage {
           ExporterChooserPage.this.myState.setExporter(nextExporter);
         }
       };
+
       GPOptionGroup nextOptions = nextExporter.getOptions();
       if (nextOptions != null) {
         nextOptions.lock();
       }
+
+      if( nextExporter.getActions() != null ){
+        GPAction action = nextExporter.getActions();
+      }
+
+
       choiceChangeActions[i] = nextAction;
+      //Add ACTION OPTIONS
       choiceOptions[i] = nextOptions;
     }
     GPOptionChoicePanel choicePanel = new GPOptionChoicePanel();

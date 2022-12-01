@@ -64,6 +64,8 @@ public class GPOptionChoicePanel {
     return getComponent(choiceChangeActions, choiceComponents, selectedGroupIndex);
   }
 
+
+
   public JComponent getComponent(Action[] choiceChangeActions, JComponent[] choiceComponents, int selectedGroupIndex) {
     myButtons = new AbstractButton[choiceChangeActions.length];
     myOptionComponents = new JComponent[choiceChangeActions.length];

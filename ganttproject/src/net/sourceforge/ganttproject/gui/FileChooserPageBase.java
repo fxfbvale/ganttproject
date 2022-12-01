@@ -90,6 +90,7 @@ public abstract class FileChooserPageBase implements WizardPage {
   }
 
   protected abstract String getFileChooserTitle();
+  protected abstract boolean googleCalendarSelected();
 
   /** @return a default export filename */
   protected String getDefaultFileName() {
@@ -127,6 +128,7 @@ public abstract class FileChooserPageBase implements WizardPage {
       fileBox.add(myChooser);
       myFileLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
       fileBox.add(myFileLabel);
+      System.out.println(googleCalendarSelected());
       contentPanel.add(fileBox, BorderLayout.NORTH);
     } else {
       final UrlFetcher urlFetcher = new UrlFetcher() {
@@ -191,9 +193,11 @@ public abstract class FileChooserPageBase implements WizardPage {
       sourceBox.add(urlFetcher.getComponent());
       contentPanel.add(sourceBox, BorderLayout.NORTH);
     }
+
     contentPanel.add(mySecondaryOptionsComponent, BorderLayout.CENTER);
     myComponent.add(contentPanel, BorderLayout.NORTH);
     return myComponent;
+
   }
 
   protected void loadPreferences() {
@@ -233,6 +237,10 @@ public abstract class FileChooserPageBase implements WizardPage {
       }
       mySecondaryOptionsComponent.add(createSecondaryOptionsPanel(), BorderLayout.NORTH);
       myChooser.setFileFilter(createFileFilter());
+      if(googleCalendarSelected())
+        myChooser.setVisible(false);
+      else
+        myChooser.setVisible(true);
       loadPreferences();
       onSelectedUrlChange(getSelectedUrl());
       myWizard.getDialog().layout();
