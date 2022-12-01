@@ -1,3 +1,0 @@
-Reviews 
-Tiago Francisco: The explanation of all complexity metrics are very clear. In the conclusion I would 
-just try to describe a little more beyond being inside the recommendation.
