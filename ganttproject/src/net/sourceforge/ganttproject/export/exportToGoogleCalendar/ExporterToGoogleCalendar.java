@@ -46,6 +46,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
+import net.sourceforge.ganttproject.task.ResourceAssignment;
+import net.sourceforge.ganttproject.task.Task;
+import net.sourceforge.ganttproject.task.TaskManager;
+import net.sourceforge.ganttproject.task.TaskProperties;
 
 
 import java.awt.Component;
@@ -134,10 +138,6 @@ public class ExporterToGoogleCalendar extends ExporterBase {
         public void loadPersistentValue(String value) {
         }
 
-        @Override
-        public boolean isChanged() {
-            return false;
-        }
     }
 
     private final FileTypeOption myFileTypeOption = new FileTypeOption();
@@ -237,7 +237,21 @@ public class ExporterToGoogleCalendar extends ExporterBase {
             protected IStatus run() {
                 OutputStream outputStream = null;
                 try {
-                    System.out.println(getProject());
+                    if(!userLoggedIn()){
+                        getUIFacade().showErrorDialog("You must first select a Google account to export the project to.");
+                        return Status.CANCEL_STATUS;
+                    }
+                    GoogleCalendar gc = new GoogleCalendar();
+                    TaskManager tm = getProject().getTaskManager();
+                    for (Task task : tm.getTasks()) {
+                        String name = task.getName();
+                        String start = task.getStart().toString();
+                        String end = task.getDisplayEnd().toString();
+                        String cost = task.getCost().getValue().toPlainString();
+                        String res = "";
+                        ResourceAssignment[] resourceAssignments = task.getAssignments();
+                        gc.createEvent(name,start,end,cost,resourceAssignments);
+                    }
                     /*
                     outputFile.createNewFile();
                     outputStream = new BufferedOutputStream(new FileOutputStream(outputFile));

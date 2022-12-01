@@ -17,7 +17,11 @@ import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.google.api.services.calendar.model.EventReminder;
 import com.google.api.services.calendar.model.Events;
+import com.google.api.services.calendar.model.EventAttendee;
 
+import net.sourceforge.ganttproject.task.ResourceAssignment;
+
+import java.util.TimeZone;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,6 +31,7 @@ import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Arrays;
+import java.util.ArrayList;
 
 /* class to demonstarte use of Calendar events list API */
 public class GoogleCalendar {
@@ -55,6 +60,10 @@ public class GoogleCalendar {
 
     public GoogleCalendar() throws IOException, GeneralSecurityException {
 
+    }
+
+    private static String addZero(String numbr){
+        return Integer.valueOf(numbr) < 10 ? "0" + numbr : numbr;
     }
 
     /**
@@ -87,32 +96,58 @@ public class GoogleCalendar {
         return credential;
     }
 
-    public static void createEvent(Calendar service) throws IOException {
+    public static void createEvent(String name, String beginDate, String endDate, String cost, ResourceAssignment[] resourceAssignments) throws IOException, GeneralSecurityException {
         // Refer to the Java quickstart on how to setup the environment:
 // https://developers.google.com/calendar/quickstart/java
 // Change the scope to CalendarScopes.CALENDAR and delete any stored
 // credentials.
 
-        Event event = new Event()
-                .setSummary("Google I/O 2015")
-                .setLocation("800 Howard St., San Francisco, CA 94103")
-                .setDescription("A chance to hear more about Google's developer products.");
+        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
 
-        DateTime startDateTime = new DateTime("2022-11-28T09:00:00-07:00");
+        List<EventAttendee> attendees = new ArrayList<>();
+
+        for (int i = 0; i < resourceAssignments.length; i++) {
+            EventAttendee eventAttendee = new EventAttendee();
+            eventAttendee.setEmail(resourceAssignments[i].getResource().getMail());
+            eventAttendee.setDisplayName(resourceAssignments[i].getResource().getName());
+            attendees.add(eventAttendee);
+        }
+
+
+        Calendar service =
+                new Calendar.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+                        .setApplicationName(APPLICATION_NAME)
+                        .build();
+
+        Event event = new Event()
+                .setSummary(name)
+                .setDescription("Cost: " + cost);
+
+        String[] beginParts = beginDate.split("/");
+        String beginMonth = addZero(beginParts[0]);
+        String beginDay = addZero(beginParts[1]);
+        String beginYear = "20" + addZero(beginParts[2]);
+
+
+        DateTime startDateTime = new DateTime(beginYear+"-"+beginMonth+"-"+beginDay+"T00:00:00.00Z");
         EventDateTime start = new EventDateTime()
                 .setDateTime(startDateTime)
-                .setTimeZone("America/Los_Angeles");
+                .setTimeZone(TimeZone.getDefault().getID());
         event.setStart(start);
 
-        DateTime endDateTime = new DateTime("2022-11-28T17:00:00-07:00");
+        String[] endParts = endDate.split("/");
+        String endMonth = addZero(endParts[0]);
+        String endDay = addZero(endParts[1]);
+        String endYear = "20" + addZero(endParts[2]);
+
+
+        DateTime endDateTime = new DateTime(endYear+"-"+endMonth+"-"+endDay+"T24:00:00.00Z");
         EventDateTime end = new EventDateTime()
                 .setDateTime(endDateTime)
-                .setTimeZone("America/Los_Angeles");
+                .setTimeZone(TimeZone.getDefault().getID());
         event.setEnd(end);
 
-        String[] recurrence = new String[] {"RRULE:FREQ=DAILY;COUNT=2"};
-        event.setRecurrence(Arrays.asList(recurrence));
-
+        event.setAttendees(attendees);
 
         EventReminder[] reminderOverrides = new EventReminder[] {
                 new EventReminder().setMethod("email").setMinutes(24 * 60),

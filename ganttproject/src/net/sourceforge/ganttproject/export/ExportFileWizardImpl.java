@@ -72,6 +72,7 @@ public class ExportFileWizardImpl extends WizardImpl {
     addPage(new FileChooserPage(myState, myProject, this, exportNode));
   }
 
+
   @Override
   protected boolean canFinish() {
     return myState.getExporter() != null && myState.myUrl != null && "file".equals(myState.getUrl().getProtocol());
