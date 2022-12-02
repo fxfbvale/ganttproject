@@ -1,5 +1,0 @@
-Reviews
-Reviewed by Pedro Gouveia - I think that this review of the Chidamber-Kemerer metrics is very well done and
-extensive, when I started reading this piece I had no idea of what these metrics were or for what they were 
-used and if they were important for our project but after reading this I was more aware of the code smells I
-might encounter and prepared for them. 

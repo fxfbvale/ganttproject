@@ -1,5 +1,0 @@
-Reviews
-Guilherme Franco: I like the fact that we can see the table with every package and their respective
-score by metric, it really helps to know exactly where the problems are. Other than that I agree with 
-the way everything is explained but I would suggest more data visualization techniques so it’s easier to
-understand each metric.
