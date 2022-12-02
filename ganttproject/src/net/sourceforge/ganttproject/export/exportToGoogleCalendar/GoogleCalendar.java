@@ -1,5 +1,6 @@
 package net.sourceforge.ganttproject.export;
 
+import biz.ganttproject.core.time.GanttCalendar;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -21,17 +22,15 @@ import com.google.api.services.calendar.model.EventAttendee;
 
 import net.sourceforge.ganttproject.task.ResourceAssignment;
 
-import java.util.TimeZone;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Arrays;
-import java.util.ArrayList;
 
 /* Class that implements the functionalities connected with the Google Calendar API */
 public class GoogleCalendar {
@@ -80,7 +79,7 @@ public class GoogleCalendar {
      * @return the modified String.
      */
     private static String addZero(String numbr){
-        return Integer.valueOf(numbr) < 10 ? "0" + numbr : numbr;
+        return (Integer.valueOf(numbr) >= 10 || numbr.length() == 2) ? numbr : "0" + numbr;
     }
 
     /**
@@ -123,7 +122,7 @@ public class GoogleCalendar {
      * @throws IOException
      * @throws GeneralSecurityException
      */
-    public static void createEvent(String name, String beginDate, String endDate, String cost, ResourceAssignment[] resourceAssignments) throws IOException, GeneralSecurityException {
+    public static void createEvent(String name, GanttCalendar beginDate, GanttCalendar endDate, String cost, ResourceAssignment[] resourceAssignments) throws IOException, GeneralSecurityException {
 
 
         //List of the event attendees to be added to the event.
@@ -144,29 +143,33 @@ public class GoogleCalendar {
                 .setSummary(name)
                 .setDescription("Cost: " + cost);
 
-        String[] beginParts = beginDate.split("/");
-        String beginMonth = addZero(beginParts[0]);
-        String beginDay = addZero(beginParts[1]);
-        String beginYear = "20" + addZero(beginParts[2]);
+        int beginMonth = beginDate.getMonth();
+        int beginDay = beginDate.getDate();
+        int beginYear = beginDate.getYear() - 1900;
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String startDateStr = dateFormat.format(new Date(beginYear,beginMonth,beginDay));
+
 
         //Set start time in the first day at midnight.
-        DateTime startDateTime = new DateTime(beginYear+"-"+beginMonth+"-"+beginDay+"T00:00:00.00Z");
+        DateTime startDateTime = new DateTime(startDateStr);
         EventDateTime start = new EventDateTime()
-                .setDateTime(startDateTime)
-                .setTimeZone(TimeZone.getDefault().getID());
+                .setDate(startDateTime);
         event.setStart(start);
 
-        String[] endParts = endDate.split("/");
-        String endMonth = addZero(endParts[0]);
-        String endDay = addZero(endParts[1]);
-        String endYear = "20" + addZero(endParts[2]);
+
+        int endMonth = endDate.getMonth();
+        int endDay = endDate.getDate();
+        int endYear = endDate.getYear() - 1900;
+
+        String endDateStr = dateFormat.format(new Date(endYear,endMonth,endDay));
+
 
 
         //Set the end time at the last day last minute.
-        DateTime endDateTime = new DateTime(endYear+"-"+endMonth+"-"+endDay+"T24:00:00.00Z");
+        DateTime endDateTime = new DateTime(endDateStr);
         EventDateTime end = new EventDateTime()
-                .setDateTime(endDateTime)
-                .setTimeZone(TimeZone.getDefault().getID());
+                .setDate(endDateTime);
         event.setEnd(end);
 
         event.setAttendees(attendees);

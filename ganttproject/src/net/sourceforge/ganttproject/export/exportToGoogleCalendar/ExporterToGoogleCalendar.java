@@ -18,6 +18,7 @@ along with GanttProject.  If not, see <http://www.gnu.org/licenses/>.
  */
 package net.sourceforge.ganttproject.export;
 
+import biz.ganttproject.core.time.GanttCalendar;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -253,8 +254,8 @@ public class ExporterToGoogleCalendar extends ExporterBase {
                     for (Task task : tm.getTasks()) {
                         //for every task create an event.
                         String name = task.getName();
-                        String start = task.getStart().toString();
-                        String end = task.getDisplayEnd().toString();
+                        GanttCalendar start = task.getStart();
+                        GanttCalendar end = task.getEnd();
                         String cost = task.getCost().getValue().toPlainString();
                         ResourceAssignment[] resourceAssignments = task.getAssignments();
                         gc.createEvent(name,start,end,cost,resourceAssignments);
