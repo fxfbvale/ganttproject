@@ -34,7 +34,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 
 import biz.ganttproject.core.option.GPOptionGroup;
-import biz.ganttproject.impex.csv.GanttXLSXExport;
+import biz.ganttproject.impex.xlsx.GanttXLSXExport;
 
 public class ExporterToXLSX extends ExporterBase {
     /** List of available/associated extensions */
@@ -76,7 +76,6 @@ public class ExporterToXLSX extends ExporterBase {
         ExporterJob result = new ExporterJob("Export project") {
             @Override
             protected IStatus run() {
-                OutputStream outputStream = null;
                 try {
 
                     // TODO Fix this ugly hack!! Ie make the settings available in a proper way
@@ -85,14 +84,6 @@ public class ExporterToXLSX extends ExporterBase {
                 } catch (Exception e) {
                     getUIFacade().showErrorDialog(e);
                     return Status.CANCEL_STATUS;
-                } finally {
-                    if (outputStream != null) {
-                        try {
-                            outputStream.close();
-                        } catch (IOException e) {
-                            GPLogger.logToLogger(e);
-                        }
-                    }
                 }
                 return Status.OK_STATUS;
             }

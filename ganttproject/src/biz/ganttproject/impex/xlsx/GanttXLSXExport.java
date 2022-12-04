@@ -1,9 +1,8 @@
 
-package biz.ganttproject.impex.csv;
+package biz.ganttproject.impex.xlsx;
 
 import biz.ganttproject.core.model.task.TaskDefaultColumn;
 import biz.ganttproject.core.option.BooleanOption;
-import biz.ganttproject.core.time.GanttCalendar;
 import biz.ganttproject.core.time.*;
 import com.aspose.cells.*;
 import com.google.common.base.Charsets;
@@ -16,26 +15,14 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import net.sourceforge.ganttproject.CustomProperty;
-import net.sourceforge.ganttproject.CustomPropertyDefinition;
-import net.sourceforge.ganttproject.CustomPropertyManager;
 import net.sourceforge.ganttproject.GanttTask;
 import net.sourceforge.ganttproject.IGanttProject;
 import net.sourceforge.ganttproject.ResourceDefaultColumn;
-import net.sourceforge.ganttproject.io.CSVOptions;
 import net.sourceforge.ganttproject.language.GanttLanguage;
-import net.sourceforge.ganttproject.resource.HumanResource;
-import net.sourceforge.ganttproject.resource.HumanResourceManager;
-import net.sourceforge.ganttproject.roles.Role;
-import net.sourceforge.ganttproject.roles.RoleManager;
-import net.sourceforge.ganttproject.task.ResourceAssignment;
 import net.sourceforge.ganttproject.task.Task;
 import net.sourceforge.ganttproject.task.TaskManager;
 import net.sourceforge.ganttproject.task.TaskProperties;
-import net.sourceforge.ganttproject.util.ColorConvertion;
 import net.sourceforge.ganttproject.util.StringUtils;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVPrinter;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,20 +41,15 @@ import java.util.Date;
  * @author Vale
  */
 public class GanttXLSXExport {
-    private static final Predicate<ResourceAssignment> COORDINATOR_PREDICATE = new Predicate<ResourceAssignment>() {
-        public boolean apply(ResourceAssignment arg) {
-            return arg.isCoordinator();
-        }
-    };
 
     private final int DAY_MILI = 86400000;
     private final int GEORGIAN_CALENDAR = 1900;
 
 
     private final TaskManager myTaskManager;
-    private final GanttCalendar calendar;
-    private final Workbook workbook;
-    private final Worksheet worksheet;
+    private GanttCalendar calendar;
+    private Workbook workbook;
+    private Worksheet worksheet;
     private Chart chart;
     private int projDuration;
     private int totalEffort;
@@ -82,6 +64,10 @@ public class GanttXLSXExport {
 
     GanttXLSXExport(TaskManager taskManager) {
         myTaskManager = Preconditions.checkNotNull(taskManager);
+        init();
+    }
+
+    private void init(){
         this.calendar = CalendarFactory.createGanttCalendar(new Date());
         this.workbook = new Workbook();
         this.worksheet = this.workbook.getWorksheets().get(0);
@@ -89,9 +75,43 @@ public class GanttXLSXExport {
         this.remainingEffort = 0;
         this.totalEffort = 0;
         this.goodPace = false;
+        this.chart = null;
+    }
+
+    public Chart getChart() {
+        return chart;
+    }
+
+    public boolean isGoodPace() {
+        return goodPace;
+    }
+
+    public double getRemainingEffort() {
+        return remainingEffort;
+    }
+
+    public int getProjDuration() {
+        return projDuration;
+    }
+
+    public GanttCalendar getCalendar() {
+        return calendar;
+    }
+
+    public Workbook getWorkbook() {
+        return workbook;
+    }
+
+    public Worksheet getWorksheet() {
+        return worksheet;
+    }
+
+    public int getTotalEffort() {
+        return totalEffort;
     }
 
     public void createChart(final File output) throws Exception {
+        init();
         // Adding sample values to cells
         worksheet.getCells().get("A2").putValue("Remaining Effort");
         worksheet.getCells().get("A3").putValue("Ideal Burndown");
@@ -142,6 +162,7 @@ public class GanttXLSXExport {
                 }
                 remainingEffort -= dayEffort;
                 worksheet.getCells().get(1, i + 1).putValue(remainingEffort); //removing the same amount everytime
+                //depending on how we are doing at the last day the bar will show in different colors
                 if(day.compareTo(calendar) == 0 && remainingEffort <= totalEffort - i*x)
                     goodPace = true;
                 else
