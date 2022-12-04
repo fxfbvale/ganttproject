@@ -123,7 +123,6 @@ public class GPXLSXExportTest extends TaskTestCase {
     assertEquals("Day1", exporter.getWorksheet().getCells().get(0,2).getValue());
     assertEquals(10 - (10/12.0), exporter.getWorksheet().getCells().get(2,2).getValue());
     assertEquals(10.0, exporter.getWorksheet().getCells().get(1,2).getValue());
-
   }
 
 }
